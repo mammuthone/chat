@@ -11,15 +11,18 @@ server.listen(3000, function(){
 	console.log('Chat server is listening for incoming data');
 });
 
+
+//Per qualsiasi richiesta sulla route, la nostra risposta sarà fornire il file index.html
 app.get('/', function(req, res) {
 	res.sendfile(__dirname + '/index.html');
-
 });
+
 
 io.sockets.on('connection', function(socket) {
 	
-	socket.on('new user', function(data,callback){
+	socket.on('new user', function(data, callback){
 		if (nicknames.indexOf(data) != -1){
+			socket.broadcast.emit(alert("New user online"));
 			callback(false);
 		} else {
 			callback(true);

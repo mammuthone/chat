@@ -9,17 +9,21 @@ jQuery(function($){
 				messageBox = $('#message'),
 				chat = $('#chat ul');
 		
-		nickForm.on('submit',function(e){
+
+	
+	nickForm.on('submit',function(e){
 			e.preventDefault();
 			var u = nickBox.val();
 			if( u.length == 0 ){
 				alert("Error! You must insert a valid nickname");
 				return false;
 			}
+			
 			socket.emit('new user', u, function(data){
 				if(data) {
 					$('#setNick').hide();
 					$('#jumbo .toHide').hide();
+					nickError.hide();
 					confirmed.css('display','inline').html("you're chatting with <b>" + u + "</b> username");
 				} else {
 					nickError.html('That username is already taken! Try again');
