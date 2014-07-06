@@ -22,7 +22,7 @@ io.sockets.on('connection', function(socket) {
 	
 	socket.on('new user', function(data, callback){
 		if (nicknames.indexOf(data) != -1){
-			socket.broadcast.emit(alert("New user online"));
+			socket.broadcast.emit("New user online");
 			callback(false);
 		} else {
 			callback(true);
